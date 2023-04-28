@@ -9,16 +9,16 @@ import { TodoService } from '../../services/todo.service';
   styles: []
 })
 export class TodoListComponent implements OnInit {
-  constructor(public todoService: TodoService, public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute, public todoService: TodoService) { }
 
   todoList: any[] = [];
 
-  ngOnInit(): void {
-    this.route.url.subscribe(url => {
+  ngOnInit() {
+    this.route.url.subscribe(async url => {
       if(url[0].path === 'favorite') {
-        this.todoList = this.todoService.todoList.filter(x => x.isFavorite); 
+        this.todoList = this.todoService.fav;
       } else {
-        this.todoList = this.todoService.todoList;
+        this.todoList = await this.todoService.getTodos(); 
       }
     });
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { TodoService } from '../../services/todo.service';
 
 @Component({
@@ -8,15 +9,17 @@ import { TodoService } from '../../services/todo.service';
 })
 export class TodoFormComponent implements OnInit {
 
-  todo = '';
+  todo: string;
 
-  constructor(public todoService: TodoService) { }
+  constructor(private router: Router, public todoService: TodoService) { }
 
   ngOnInit(): void {
+    this.todo = '';
   }
 
   onSubmit(){
     this.todoService.addTodo(this.todo);
+    this.router.navigate(['/list'])
     this.todo = '';
   }
 }

@@ -14,19 +14,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
-
 # Docker Commands
 
 
@@ -70,4 +57,54 @@ Command to force stop & remove running container
 
 ```sh
 docker rm -f todoui
+```
+
+# Simple Node Server
+
+Create a file app.js
+
+```sh
+const express = require('express')
+const app = express()
+const port = 3000
+
+app.get('/api', (req, res) => {
+  res.send('Hello World!')
+})
+
+app.get('/api/todos', (req, res) => {
+  res.json([
+    {
+      id: 1,
+      title: 'Todo One',
+      isCompleted: false,
+      isFavorite: false,
+      date: new Date('4-15-2020')
+    },
+    {
+      id: 2,
+      title: 'Todo Two',
+      isCompleted: false,
+      isFavorite: false,
+      date: new Date('5-15-2020')
+    },
+    {
+      id: 3,
+      title: 'Todo Three',
+      isCompleted: false,
+      isFavorite: false,
+      date: new Date('6-15-2020')
+    }
+  ]);
+})
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+})
+```
+
+## Command to bring up Node server
+
+```sh
+node app.js
 ```

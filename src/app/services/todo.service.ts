@@ -1,37 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../models/Todo';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
   fav = [];
-  todoList: Todo[] = [
-    {
-      id: 1,
-      title: 'Todo One',
-      isCompleted: false,
-      isFavorite: false,
-      date: new Date('4-15-2020')
-    },
-    {
-      id: 2,
-      title: 'Todo Two',
-      isCompleted: false,
-      isFavorite: false,
-      date: new Date('5-15-2020')
-    },
-    {
-      id: 3,
-      title: 'Todo Three',
-      isCompleted: false,
-      isFavorite: false,
-      date: new Date('6-15-2020')
-    }
-  ];
+  todoList: Todo[] = [];
 
-  constructor(private deletePopup: ToastrService) { }
+  constructor(private http: HttpClient, private deletePopup: ToastrService) { }
+
+  async getTodos(): Promise<any> {
+    return await this.http.get(`/api/todos`).toPromise();
+  }
 
   deleteTodo(item) {
     let index = this.todoList.indexOf(item);
@@ -44,12 +27,13 @@ export class TodoService {
     let id = this.todoList.length + 2;
 
     const item: Todo = {
-      id: id,
+      id,
+      title,
       isCompleted: false,
       isFavorite: false,
-      date: new Date(),
-      title: title
+      date: new Date()
     }
+    
     this.todoList.unshift(item);
   }
 
