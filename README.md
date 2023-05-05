@@ -59,6 +59,15 @@ Command to force stop & remove running container
 docker rm -f todoui
 ```
 
+# Cypress Integration
+
+https://docs.cypress.io/guides/end-to-end-testing/protractor-to-cypress#Getting-Started
+
+### Follow below steps to add Cypress to Angular project
+- ng add @cypress/schematic : https://www.npmjs.com/package/@cypress/schematic
+- Configure Cypress with baseUrl & other settings : cypress.config.ts
+- Add basic test cases : spec.cy.ts
+
 # Simple Node Server
 
 Create a file app.js
